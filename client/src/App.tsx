@@ -938,10 +938,12 @@ const [nowMs, setNowMs] = useState<number>(Date.now());
 
 
       {screen === 'profile' && (
-        <ProfileScreen
-          totalGachaCount={player?.totalGachaCount ?? 0}
-          totalPaintCount={player?.totalPaintCount ?? 0}
-        />
+<ProfileScreen
+  playerName={player?.name ?? ''}
+  playerId={player?.id ?? ''}
+  totalGachaCount={player?.totalGachaCount ?? 0}
+  totalPaintCount={player?.totalPaintCount ?? 0}
+/>
       )}
 
 

@@ -1,4 +1,6 @@
 type ProfileScreenProps = {
+  playerName: string;
+  playerId: string;
   totalGachaCount: number;
   totalPaintCount: number;
 };
@@ -26,24 +28,33 @@ const labelStyle = {
   fontSize: 14,
 };
 
-export default function ProfileScreen({ totalGachaCount, totalPaintCount }: ProfileScreenProps) {
+export default function ProfileScreen({
+  playerName,
+  playerId,
+  totalGachaCount,
+  totalPaintCount,
+}: ProfileScreenProps) {
   return (
-    <div
-      style={cardStyle}
-    >
-
+    <div style={cardStyle}>
       <div style={titleStyle}>
         👤 Profile
       </div>
 
       <div style={labelStyle}>
+        プレイヤー名：{playerName}
+      </div>
+
+      <div style={{ ...labelStyle, marginTop: 8 }}>
+        プレイヤーID：{playerId}
+      </div>
+
+      <div style={{ ...labelStyle, marginTop: 8 }}>
         総ガチャ回数：{totalGachaCount}回
       </div>
 
-      <div style={{...labelStyle, marginTop: 8}}>
+      <div style={{ ...labelStyle, marginTop: 8 }}>
         総塗り回数：{totalPaintCount}回
       </div>
-
     </div>
   );
 }
