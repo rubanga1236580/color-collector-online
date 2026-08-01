@@ -1,0 +1,4 @@
+export const GAME_CONFIG = {
+  ENERGY_INTERVAL_MS: 60 * 60 * 1000,
+  ENERGY_MAX: 5,
+};
