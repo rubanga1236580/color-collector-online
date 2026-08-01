@@ -34,16 +34,20 @@ export default function Advertisement() {
     containerRef.current.appendChild(script);
   }, []);
 
-  return (
-    <div
-      ref={containerRef}
-      style={{
-        width: "728px",
-        maxWidth: "100%",
-        margin: "20px auto",
-        display: "flex",
-        justifyContent: "center",
-      }}
-    />
-  );
+return (
+  <div
+    ref={containerRef}
+    style={{
+      width: "728px",
+      maxWidth: "100%",
+      margin: "20px auto",
+      display: "flex",
+      justifyContent: "center",
+      border: "2px solid red",
+      minHeight: "120px",
+    }}
+  >
+    TEST
+  </div>
+);
 }
