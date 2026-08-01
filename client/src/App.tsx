@@ -468,11 +468,16 @@ const fetchPlayer = async () => {
       }
 
 
-      if(data.player){
-        setPlayer(data.player);
-      }
+if(data.player){
+  setPlayer(data.player);
 
-      setDailyTicketMessage(data.message ?? null);
+  setGacha({
+    gachaTicket: data.player.gachaTicket,
+    canDraw: data.player.gachaTicket > 0,
+  });
+}
+
+      
 
     }catch{
 
