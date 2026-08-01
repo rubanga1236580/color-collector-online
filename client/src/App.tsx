@@ -268,26 +268,37 @@ const [nowMs, setNowMs] = useState<number>(Date.now());
 
     let mounted = true;
 
-    const fetchPlayer = async () => {
-      try {
-        const response = await fetch(buildApiUrl('/api/player'), withServerIdHeader());
 
-        if (!response.ok) {
-          return;
-        }
+const fetchPlayer = async () => {
+  try {
+    console.log("マップ更新", new Date().toLocaleTimeString());
+    const [playerResponse, mapResponse] = await Promise.all([
+      fetch(buildApiUrl('/api/player'), withServerIdHeader()),
+      fetch(buildApiUrl('/api/map'), withServerIdHeader()),
+    ]);
 
-        const playerData = await response.json();
-        const configuredIntervalMs = getEnergyIntervalMsFromResponse(response);
+    if (!playerResponse.ok || !mapResponse.ok) {
+      return;
+    }
 
-        if (mounted) {
-          if (configuredIntervalMs) {
-            setEnergyIntervalMs(configuredIntervalMs);
-          }
-          setPlayer(playerData);
-        }
-      } catch {
+    const playerData = await playerResponse.json();
+    const mapData = await mapResponse.json();
+
+    const configuredIntervalMs =
+      getEnergyIntervalMsFromResponse(playerResponse);
+
+    if (mounted) {
+      if (configuredIntervalMs) {
+        setEnergyIntervalMs(configuredIntervalMs);
       }
-    };
+
+      setPlayer(playerData);
+      setMap(mapData);
+    }
+  } catch {
+    // 通信失敗時は何もしない
+  }
+};
 
     const pollId = window.setInterval(() => {
       void fetchPlayer();
