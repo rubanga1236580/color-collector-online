@@ -20,6 +20,7 @@ import type { EncyclopediaData } from './types/encyclopedia';
 import type { GachaData, GachaRarity } from './types/gacha';
 import type { MapData } from './types/map';
 import type { PlayerData } from './types/player';
+import AdBanner from './components/AdBanner';
 
 type Screen =
   | 'playerRegister'
@@ -784,20 +785,35 @@ const [nowMs, setNowMs] = useState<number>(Date.now());
         />
       )}
 
-      {screen === 'home' && (
-        <HomeScreen
-          debugMode={debugMode}
-          dailyTicketMessage={dailyTicketMessage}
-          onDailyTicketClaim={() => { void claimDailyTicket(); }}
-          onMapClick={() => setScreen('mapSelect')}
-          onShopClick={() => setScreen('shop')}
-          onGachaClick={() => setScreen('gacha')}
-          onEncyclopediaClick={() => setScreen('encyclopedia')}
-          onProfileClick={() => setScreen('profile')}
-          onDebugClick={() => setScreen('debug')}
-          onDebugGachaClick={() => setScreen('debugGacha')}
-        />
-      )}
+{screen === 'home' && (
+  <>
+    <HomeScreen
+      debugMode={debugMode}
+      dailyTicketMessage={dailyTicketMessage}
+      onDailyTicketClaim={() => {
+        void claimDailyTicket();
+      }}
+      onMapClick={() => setScreen('mapSelect')}
+      onShopClick={() => setScreen('shop')}
+      onGachaClick={() => setScreen('gacha')}
+      onEncyclopediaClick={() => setScreen('encyclopedia')}
+      onProfileClick={() => setScreen('profile')}
+      onDebugClick={() => setScreen('debug')}
+      onDebugGachaClick={() => setScreen('debugGacha')}
+    />
+
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        marginTop: 20,
+        marginBottom: 20,
+      }}
+    >
+      <AdBanner />
+    </div>
+  </>
+)}
 
       {screen !== 'playerRegister' && screen !== 'home' && screen !== 'map' && screen !== 'mapSelect' && screen !== 'serverSelect' && (
         <div style={{textAlign:'center', marginBottom:12}}>
