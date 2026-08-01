@@ -1,21 +1,49 @@
-export default function Advertisement() {
+import { useEffect, useRef } from "react";
+
+declare global {
+  interface Window {
+    atOptions: any;
+  }
+}
+
+export default function AdBanner() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const loaded = useRef(false);
+
+  useEffect(() => {
+    if (loaded.current) return;
+    loaded.current = true;
+
+    if (!containerRef.current) return;
+
+    containerRef.current.innerHTML = "";
+
+    window.atOptions = {
+      key: "405786621168c787ed6da2ed3b1b8075",
+      format: "iframe",
+      height: 90,
+      width: 728,
+      params: {},
+    };
+
+    const script = document.createElement("script");
+    script.src =
+      "https://www.highperformanceformat.com/405786621168c787ed6da2ed3b1b8075/invoke.js";
+    script.async = true;
+
+    containerRef.current.appendChild(script);
+  }, []);
+
   return (
     <div
+      ref={containerRef}
       style={{
-        maxWidth: 420,
-        margin: '0 auto 16px',
-        padding: 16,
-        border: '2px dashed #9ca3af',
-        borderRadius: 12,
-        background: '#f9fafb',
-        textAlign: 'center',
-        color: '#6b7280',
-        fontWeight: 700,
+        width: "728px",
+        maxWidth: "100%",
+        margin: "20px auto",
+        display: "flex",
+        justifyContent: "center",
       }}
-    >
-      広告エリア
-      <br />
-      （Google AdSense導入予定）
-    </div>
+    />
   );
 }
