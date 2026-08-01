@@ -468,7 +468,7 @@ const fetchPlayer = async () => {
       }
 
 
-if(data.player){
+if (data.player) {
   setPlayer(data.player);
 
   setGacha({
@@ -477,7 +477,7 @@ if(data.player){
   });
 }
 
-      
+setDailyTicketMessage(data.message ?? null);   
 
     }catch{
 
