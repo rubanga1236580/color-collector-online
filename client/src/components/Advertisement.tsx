@@ -6,7 +6,7 @@ declare global {
   }
 }
 
-export default function AdBanner() {
+export default function Advertisement() {
   const containerRef = useRef<HTMLDivElement>(null);
   const loaded = useRef(false);
 
