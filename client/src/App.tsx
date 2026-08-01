@@ -469,6 +469,8 @@ const fetchPlayer = async () => {
 
 
 if (data.player) {
+  console.log("受け取り後", data.player);
+
   setPlayer(data.player);
 
   setGacha({
