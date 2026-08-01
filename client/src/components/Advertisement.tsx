@@ -43,7 +43,6 @@ return (
       margin: "20px auto",
       display: "flex",
       justifyContent: "center",
-      border: "2px solid red",
       minHeight: "120px",
     }}
   >
