@@ -262,6 +262,7 @@ const [nowMs, setNowMs] = useState<number>(Date.now());
   }, []);
 
   useEffect(() => {
+    console.log("isPlayerReady =", isPlayerReady);
     if (!isPlayerReady) {
       return;
     }
