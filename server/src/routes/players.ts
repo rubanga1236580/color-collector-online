@@ -76,24 +76,4 @@ router.post('/', (req, res) => {
   }
 });
 
-router.post('/reset-all', (_req, res) => {
-  try {
-    const db = getDatabase();
-
-    db.prepare('DELETE FROM Players').run();
-
-    res.json({
-      success: true,
-      message: '全プレイヤーを削除しました',
-    });
-  } catch (error) {
-    console.error(error);
-
-    res.status(500).json({
-      success: false,
-      error: '削除に失敗しました',
-    });
-  }
-});
-
 export default router;
