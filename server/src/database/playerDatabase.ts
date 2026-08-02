@@ -248,3 +248,14 @@ export function getPlayer(id: string): PlayerData | null {
   }
 }
 
+export function deleteAllPlayers(): void {
+  const db = getDatabase();
+
+  try {
+    db.prepare('DELETE FROM Players').run();
+    console.log('[Database] 全プレイヤーを削除しました');
+  } catch (error) {
+    console.error('[Database] 全プレイヤー削除に失敗しました', error);
+    throw error;
+  }
+}

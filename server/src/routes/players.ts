@@ -1,7 +1,11 @@
 import { Router } from 'express';
 import { randomUUID } from 'crypto';
 import { getDatabase } from '../database/db.js';
-import { savePlayer, getPlayersByServerId } from '../database/playerDatabase.js';
+import {
+  savePlayer,
+  getPlayersByServerId,
+  deleteAllPlayers,
+} from '../database/playerDatabase.js';
 import { GAME_CONFIG } from '../config/gameConfig.js';
 import { COLORS } from '../data/colors.js';
 import type { PlayerData } from '../data/player.js';
@@ -73,6 +77,24 @@ router.post('/', (req, res) => {
   } catch (err) {
     console.error('[Error] 新規プレイヤーの作成日時取得に失敗しました:', err);
     res.json({ success: true, player: { id, name: player.name, createdAt: now } });
+  }
+});
+
+router.post('/reset-all', (_req, res) => {
+  try {
+    deleteAllPlayers();
+
+    res.json({
+      success: true,
+      message: '全プレイヤーを削除しました',
+    });
+  } catch (error) {
+    console.error('[Error] 全プレイヤー削除に失敗しました:', error);
+
+    res.status(500).json({
+      success: false,
+      error: '全プレイヤー削除に失敗しました',
+    });
   }
 });
 
