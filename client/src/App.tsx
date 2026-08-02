@@ -735,6 +735,7 @@ setDailyTicketMessage(data.message ?? null);
 
 
   const handlePlayerReset = async ()=>{
+
     const confirmed = window.confirm('プレイヤーデータを初期状態に戻しますか？');
     if (!confirmed) {
       return;
@@ -762,6 +763,36 @@ setDailyTicketMessage(data.message ?? null);
       setError('サーバーに接続できませんでした');
     }
   };
+
+  const handleResetAllPlayers = async () => {
+  const confirmed = window.confirm(
+    '本当に全プレイヤーを削除しますか？'
+  );
+
+  if (!confirmed) {
+    return;
+  }
+
+  try {
+    const response = await fetch(
+      buildApiUrl('/api/players/reset-all'),
+      withServerIdHeader({
+        method: 'POST',
+      }),
+    );
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      setError(data.error ?? '削除に失敗しました');
+      return;
+    }
+
+    alert(data.message);
+  } catch {
+    setError('サーバーに接続できませんでした');
+  }
+};
 
   const refreshPlayerAndGacha = async ()=>{
     try {
@@ -978,6 +1009,9 @@ setDailyTicketMessage(data.message ?? null);
 
       {screen === 'debug' && (
         <DebugScreen
+          onResetAllPlayers={() => {
+             void handleResetAllPlayers();
+         }}
           player={player}
           debugEditPlayer={debugEditPlayer}
           gachaAnimation={gachaAnimation}

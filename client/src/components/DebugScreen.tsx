@@ -4,6 +4,7 @@ import type { GachaRarity } from '../types/gacha';
 import type { PlayerData } from '../types/player';
 
 type DebugScreenProps = {
+  onResetAllPlayers: () => void;
   player: PlayerData | null;
   debugEditPlayer: PlayerData | null;
   gachaAnimation: {
@@ -35,6 +36,7 @@ export default function DebugScreen({
   onApplyDebugEditPlayer,
   onStartDebugGachaAnimation,
   onClearGachaAnimation,
+  onResetAllPlayers,
 }: DebugScreenProps) {
   return (
     <div
@@ -100,6 +102,23 @@ export default function DebugScreen({
                 🔄 プレイヤーリセット
               </button>
             </div>
+
+<div style={{ display: 'flex', justifyContent: 'center', marginTop: 8 }}>
+  <button
+    onClick={onResetAllPlayers}
+    style={{
+      padding: '8px 16px',
+      border: '1px solid #991b1b',
+      borderRadius: 8,
+      background: '#fecaca',
+      color: '#7f1d1d',
+      fontWeight: 700,
+      cursor: 'pointer',
+    }}
+  >
+    🗑 全プレイヤー削除
+  </button>
+</div>
 
             <label style={{display:'grid', gap:4}}>
               <span>Coins</span>
