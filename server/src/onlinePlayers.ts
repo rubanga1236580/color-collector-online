@@ -1,7 +1,11 @@
 const onlinePlayers = new Map<string, number>();
 
 export function updateOnlinePlayer(playerId: string) {
+  console.log("[ONLINE] update:", playerId);
+
   onlinePlayers.set(playerId, Date.now());
+
+  console.log("[ONLINE] size:", onlinePlayers.size);
 }
 
 export function getOnlinePlayerCount(): number {
@@ -12,6 +16,8 @@ export function getOnlinePlayerCount(): number {
       onlinePlayers.delete(playerId);
     }
   }
+
+  console.log("[ONLINE] count:", onlinePlayers.size);
 
   return onlinePlayers.size;
 }
