@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react';
+import { buildApiUrl } from '../api/config';
 import { useState } from 'react';
 import { COLORS } from '../data/colors';
 import type { MapData } from '../types/map';
@@ -62,6 +64,31 @@ export default function MapScreen({
   
 }: MapScreenProps) {
   const [isOtherColorsExpanded, setIsOtherColorsExpanded] = useState(false);
+
+  useEffect(() => {
+  const sendPing = async () => {
+    try {
+      await fetch(buildApiUrl('/api/map/ping'), {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+    } catch {
+      // 失敗しても何もしない
+    }
+  };
+
+  // マップを開いたらすぐ送信
+  void sendPing();
+
+  // 10秒ごとに送信
+  const timer = setInterval(() => {
+    void sendPing();
+  }, 10000);
+
+  return () => clearInterval(timer);
+}, []);
 
   const selectedColorData = COLORS.find((color) => color.id === selectedColor);
   const stocksMap = player?.stocks as Record<string, number> | undefined;

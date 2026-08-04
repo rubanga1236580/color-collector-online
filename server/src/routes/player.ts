@@ -138,7 +138,6 @@ function createInitialPlayerData(id: string): ValidatedPlayerPayload {
 
 router.get('/', (_req, res) => {
   const playerId = getPlayerIdFromRequest(_req);
-  updateOnlinePlayer(playerId);
 
   // SQLiteからプレイヤー情報を取得
   const dbPlayer = getPlayer(playerId);

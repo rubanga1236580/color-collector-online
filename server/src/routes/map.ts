@@ -1,3 +1,4 @@
+import { updateOnlinePlayer } from '../onlinePlayers.js';
 import { Router } from 'express';
 import { mapData } from '../data/map.js';
 import { COLORS } from '../data/colors.js';
@@ -14,6 +15,16 @@ const colorIdSet = new Set(colorIds);
 function isValidColor(color: unknown): color is string {
   return typeof color === 'string' && colorIdSet.has(color);
 }
+
+router.post('/ping', (req, res) => {
+  const playerId = getPlayerIdFromRequest(req);
+
+  updateOnlinePlayer(playerId);
+
+  res.json({
+    success: true,
+  });
+});
 
 router.get('/', (_req, res) => {
   const mapId = getMapIdFromRequest(_req);
