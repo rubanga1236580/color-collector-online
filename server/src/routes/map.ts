@@ -125,9 +125,17 @@ router.post('/', (req, res) => {
     savePlayer(playerData);
     console.log(`[Map] Player updated: coins=${playerData.coins}, ${color}=${playerData.stocks[colorKey]}`);
 
-    // マップを更新
-    mapData.cells[index] = color;
-    saveMap(mapId, mapData.cells);
+// SQLiteから現在のマップを読み込む
+const cells = loadMap(mapId);
+
+// そのマップを更新
+cells[index] = color;
+
+// 更新したマップを保存
+saveMap(mapId, cells);
+
+// メモリも同期
+mapData.cells = cells;
     console.log(`[Map] Cell painted: index=${index}, color=${color}`);
 
     // 更新後のデータをレスポンス
