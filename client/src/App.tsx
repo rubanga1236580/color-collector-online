@@ -277,7 +277,17 @@ const [nowMs, setNowMs] = useState<number>(Date.now());
 
   const timer = setInterval(fetchOnlineCount, 10000);
 
-  return () => clearInterval(timer);
+  return () => {
+  clearInterval(timer);
+
+  void fetch(
+    buildApiUrl('/api/map/leave'),
+    withServerIdHeader({
+      method: 'POST',
+    }),
+  );
+};
+
 }, []);
 
   useEffect(() => {
