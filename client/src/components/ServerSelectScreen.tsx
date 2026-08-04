@@ -62,6 +62,7 @@ export default function ServerSelectScreen({ onSelectServer }: ServerSelectScree
               id: 'server-001',
               name: 'Server 1',
               description: '通常サーバー',
+              "onlineCount":5
             },
           ]);
         }
@@ -88,7 +89,7 @@ export default function ServerSelectScreen({ onSelectServer }: ServerSelectScree
             {server.description}
           </div>
           <div style={{ color: '#334155', fontSize: 14, marginBottom: 12 }}>
-            オンライン人数：- 人
+            👥 オンライン人数：{server.onlineCount}人
           </div>
           <button
             type="button"

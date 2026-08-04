@@ -8,6 +8,7 @@ export type ServerListItem = {
   id: string;
   name: string;
   description: string;
+  onlineCount: number;
 };
 
 export function getClientServerId(): string {
