@@ -16,7 +16,7 @@ type PlayerHeaderProps = {
 export default function PlayerHeader({
   player,
   gacha,
-  coins = 1000,
+  coins = ,
   energy = 5,
   energyMax = 5,
   gachaTicket = 1,
