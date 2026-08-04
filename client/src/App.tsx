@@ -265,6 +265,8 @@ const [nowMs, setNowMs] = useState<number>(Date.now());
 
       const data = await response.json();
 
+      console.log("ONLINE API =", data);
+
       setOnlineCount(data.onlineCount ?? 0);
     } catch (error) {
       console.error(error);
