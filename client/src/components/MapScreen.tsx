@@ -1,3 +1,4 @@
+import { withServerIdHeader } from '../api/serverApi';
 import { useEffect, useState } from 'react';
 import { API_BASE_URL, buildApiUrl } from '../api/config';
 import { COLORS } from '../data/colors';
@@ -72,10 +73,12 @@ export default function MapScreen({
     console.log('PING URL =', url);
 
     try {
-      const response = await fetch(url, {
-        method: 'POST',
-      });
-
+ const response = await fetch(
+  url,
+  withServerIdHeader({
+    method: 'POST',
+  }),
+);
       console.log('PING STATUS =', response.status);
     } catch (error) {
       console.error('PING ERROR =', error);
