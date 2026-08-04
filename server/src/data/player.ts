@@ -5,7 +5,6 @@ export type PlayerData = {
   energy: number
   energyMax: number
   lastEnergyUpdate: string
-  lastSeen: string
   gachaTicket: number
   totalGachaCount: number
   totalPaintCount: number
@@ -87,7 +86,6 @@ export const playerData: PlayerData = {
   energy: 0,
   energyMax: 5,
   lastEnergyUpdate: new Date().toISOString(),
-  lastSeen: new Date().toISOString(),
   gachaTicket: 0,
   totalGachaCount: 0,
   totalPaintCount: 0,
