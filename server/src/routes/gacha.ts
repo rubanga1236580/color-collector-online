@@ -47,7 +47,7 @@ function createInitialPlayer(id: string): PlayerData {
   return {
     id,
     name: 'Player',
-    coins: 1000,
+    coins: 100
     energy: 0,
     energyMax: 5,
     lastEnergyUpdate: now,

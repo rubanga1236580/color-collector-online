@@ -82,7 +82,7 @@ export type PlayerData = {
 export const playerData: PlayerData = {
   id: "player-001",
   name: "Player",
-  coins: 1000,
+  coins: 100
   energy: 0,
   energyMax: 5,
   lastEnergyUpdate: new Date().toISOString(),

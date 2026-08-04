@@ -124,7 +124,7 @@ function createInitialPlayerData(id: string): ValidatedPlayerPayload {
     energy: 0,
     energyMax: 5,
     lastEnergyUpdate: now,
-    gachaTicket: 1,
+    gachaTicket: 0,
     totalGachaCount: 0,
     totalPaintCount: 0,
     gachaLastClaimDate: '',
