@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { buildApiUrl } from '../api/config';
+import { API_BASE_URL, buildApiUrl } from '../api/config';
 import { COLORS } from '../data/colors';
 import type { MapData } from '../types/map';
 import type { PlayerData } from '../types/player';
@@ -66,33 +66,33 @@ export default function MapScreen({
 
   useEffect(() => {
   const sendPing = async () => {
-  const url = buildApiUrl('/api/map/ping');
+    const url = buildApiUrl('/api/map/ping');
 
-  console.log('PING URL =', url);
+    console.log('API_BASE_URL =', API_BASE_URL);
+    console.log('PING URL =', url);
 
-  try {
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+      });
 
-    console.log('PING STATUS =', response.status);
-  } catch (e) {
-    console.error('PING ERROR', e);
-  }
-};
+      console.log('PING STATUS =', response.status);
+    } catch (error) {
+      console.error('PING ERROR =', error);
+    }
+  };
 
-  // マップを開いたらすぐ送信
+  // マップを開いた直後
   void sendPing();
 
-  // 10秒ごとに送信
-  const timer = setInterval(() => {
+  // 10秒ごと
+  const timer = window.setInterval(() => {
     void sendPing();
   }, 10000);
 
-  return () => clearInterval(timer);
+  return () => {
+    clearInterval(timer);
+  };
 }, []);
 
   const selectedColorData = COLORS.find((color) => color.id === selectedColor);
