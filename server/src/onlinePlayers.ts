@@ -12,7 +12,7 @@ export function getOnlinePlayerCount(): number {
   const now = Date.now();
 
   for (const [playerId, lastSeen] of onlinePlayers) {
-    if (now - lastSeen > 30000) {
+    if (now - lastSeen > 8000) {
       onlinePlayers.delete(playerId);
     }
   }

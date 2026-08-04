@@ -91,7 +91,7 @@ export default function MapScreen({
   // 10秒ごと
   const timer = window.setInterval(() => {
     void sendPing();
-  }, 10000);
+  }, 3000);
 
   return () => {
     clearInterval(timer);
