@@ -32,7 +32,7 @@ export default function EncyclopediaScreen({ encyclopedia, colorMap }: Encyclope
     >
 
       <div style={titleStyle}>
-        📚 Encyclopedia
+        📚 色図鑑
       </div>
 
       <div style={{textAlign:'center', color:'#334155', marginBottom:12, fontSize:14}}>

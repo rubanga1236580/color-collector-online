@@ -134,7 +134,7 @@ export default function GachaScreen({ onDrawSuccess }: GachaScreenProps) {
       <div
         style={cardStyle}
       >
-      <h2 style={titleStyle}>🎁 Gacha</h2>
+      <h2 style={titleStyle}>🎁 ガチャ</h2>
       <div style={{ display: 'grid', gap: 12, marginBottom: 12 }}>
         {gachas.map((gacha) => (
           <div

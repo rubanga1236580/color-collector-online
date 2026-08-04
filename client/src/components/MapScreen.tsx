@@ -131,7 +131,7 @@ export default function MapScreen({
             background:'#e2e8f0',
           }}
         >
-          🏠 Home
+          🏠 ホーム
         </button>
       </div>
 
@@ -140,7 +140,7 @@ export default function MapScreen({
           style={panelStyle}
         >
           <h2 style={titleStyle}>
-            🎨 Map
+            🎨 マップ
           </h2>
 
           <div

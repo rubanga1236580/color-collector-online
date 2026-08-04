@@ -58,7 +58,7 @@ export default function HomeScreen({
   return (
     <>
       <h1 style={titleStyle}>
-        🏠 Home
+        🏠 ホーム
       </h1>
 
       <div style={cardStyle}>
@@ -85,7 +85,7 @@ export default function HomeScreen({
             background: '#fef3c7',
           }}
         >
-          🎨 Map
+          🎨 マップ
         </button>
 
         <button
@@ -95,7 +95,7 @@ export default function HomeScreen({
             background: '#dbeafe',
           }}
         >
-          🛒 Shop
+          🛒 ショップ
         </button>
 
         <button
@@ -105,7 +105,7 @@ export default function HomeScreen({
             background: '#ffedd5',
           }}
         >
-          🎁 Gacha
+          🎁 ガチャ
         </button>
 
         <button
@@ -115,7 +115,7 @@ export default function HomeScreen({
             background: '#e2e8f0',
           }}
         >
-          📚 Encyclopedia
+          📚 色図鑑
         </button>
 
         <button
@@ -125,7 +125,7 @@ export default function HomeScreen({
             background: '#dcfce7',
           }}
         >
-          👤 Profile
+          👤 プロフィール
         </button>
 
         {debugMode && (

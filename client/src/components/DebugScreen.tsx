@@ -293,7 +293,7 @@ export default function DebugScreen({
               gap:8
             }}
           >
-            <div style={{fontWeight:700}}>🎁 Gacha Animation Test</div>
+            <div style={{fontWeight:700}}>🎁 ガチャアニメーションテスト</div>
 
             <div style={{display:'grid', gridTemplateColumns:'repeat(2, minmax(0, 1fr))', gap:8}}>
               <button

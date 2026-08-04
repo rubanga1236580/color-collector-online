@@ -902,7 +902,7 @@ setDailyTicketMessage(data.message ?? null);
               cursor:'pointer'
             }}
           >
-            🏠 Homeに戻る
+            🏠 ホームに戻る
           </button>
         </div>
       )}

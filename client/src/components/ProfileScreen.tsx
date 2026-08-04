@@ -37,7 +37,7 @@ export default function ProfileScreen({
   return (
     <div style={cardStyle}>
       <div style={titleStyle}>
-        👤 Profile
+        👤 プロフィール
       </div>
 
       <div style={labelStyle}>
