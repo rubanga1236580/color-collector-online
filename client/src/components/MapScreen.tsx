@@ -107,6 +107,8 @@ export default function MapScreen({
   const remainingOtherColorCount = Math.max(0, otherColors.length - 6);
   const shouldShowOtherColorsToggle = otherColors.length > 6;
 
+  console.log("MapScreen onlineCount =", onlineCount);
+
   return (
     <>
       <div
