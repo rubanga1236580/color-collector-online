@@ -89,7 +89,7 @@ export default function ServerSelectScreen({ onSelectServer }: ServerSelectScree
             {server.description}
           </div>
           <div style={{ color: '#334155', fontSize: 14, marginBottom: 12 }}>
-            👥 オンライン人数：{server.onlineCount}人
+           オンライン人数：{server.onlineCount} 人
           </div>
           <button
             type="button"

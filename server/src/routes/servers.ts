@@ -1,5 +1,5 @@
-import { getOnlinePlayerCount } from '../onlinePlayers.js';
 import { Router } from 'express';
+import { getOnlinePlayerCount } from '../onlinePlayers.js';
 
 const router = Router();
 
