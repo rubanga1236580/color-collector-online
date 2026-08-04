@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { buildApiUrl } from '../api/config';
-import { useState } from 'react';
 import { COLORS } from '../data/colors';
 import type { MapData } from '../types/map';
 import type { PlayerData } from '../types/player';
@@ -67,17 +66,23 @@ export default function MapScreen({
 
   useEffect(() => {
   const sendPing = async () => {
-    try {
-      await fetch(buildApiUrl('/api/map/ping'), {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-    } catch {
-      // 失敗しても何もしない
-    }
-  };
+  const url = buildApiUrl('/api/map/ping');
+
+  console.log('PING URL =', url);
+
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    console.log('PING STATUS =', response.status);
+  } catch (e) {
+    console.error('PING ERROR', e);
+  }
+};
 
   // マップを開いたらすぐ送信
   void sendPing();
