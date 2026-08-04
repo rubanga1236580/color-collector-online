@@ -1,4 +1,7 @@
-import { updateOnlinePlayer } from '../onlinePlayers.js';
+import {
+  updateOnlinePlayer,
+  removeOnlinePlayer,
+} from '../onlinePlayers.js';
 import { Router } from 'express';
 import { mapData } from '../data/map.js';
 import { COLORS } from '../data/colors.js';
@@ -24,6 +27,16 @@ router.post('/ping', (req, res) => {
   console.log("USED playerId =", playerId);
 
   updateOnlinePlayer(playerId);
+
+  res.json({
+    success: true,
+  });
+});
+
+router.post('/leave', (req, res) => {
+  const playerId = getPlayerIdFromRequest(req);
+
+  removeOnlinePlayer(playerId);
 
   res.json({
     success: true,

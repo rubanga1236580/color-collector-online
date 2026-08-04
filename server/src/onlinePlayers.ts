@@ -21,3 +21,10 @@ export function getOnlinePlayerCount(): number {
 
   return onlinePlayers.size;
 }
+
+export function removeOnlinePlayer(playerId: string) {
+  onlinePlayers.delete(playerId);
+
+  console.log("[ONLINE] remove:", playerId);
+  console.log("[ONLINE] size:", onlinePlayers.size);
+}
