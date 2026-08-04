@@ -1,5 +1,4 @@
-import { buildApiUrl } from '../api/config';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { COLORS } from '../data/colors';
 import type { MapData } from '../types/map';
 import type { PlayerData } from '../types/player';
@@ -63,27 +62,7 @@ export default function MapScreen({
   
 }: MapScreenProps) {
   const [isOtherColorsExpanded, setIsOtherColorsExpanded] = useState(false);
-  useEffect(() => {
-  const fetchOnlineCount = async () => {
-    try {
-      const response = await fetch(
-      buildApiUrl('/api/players/online-count')
-);
-      const data = await response.json();
 
-      setOnlineCount(data.onlineCount ?? 0);
-    } catch {
-      // 通信失敗時は何もしない
-    }
-  };
-
-  fetchOnlineCount();
-
-  const timer = setInterval(fetchOnlineCount, 10000);
-
-  return () => clearInterval(timer);
-}, []);
-  const [onlineCount, setOnlineCount] = useState(0);
   const selectedColorData = COLORS.find((color) => color.id === selectedColor);
   const stocksMap = player?.stocks as Record<string, number> | undefined;
   const unlockedMap = player?.unlocked as Record<string, boolean> | undefined;
@@ -137,15 +116,6 @@ export default function MapScreen({
   👥 参加人数：{onlineCount}人
 </div>
 
-          <div
-  style={{
-    textAlign: 'center',
-    fontWeight: 700,
-    marginBottom: 12,
-  }}
->
-  👥 参加人数：{onlineCount}人
-</div>
 
           <div style={{display:'grid', gap:10}}>
             <div style={{fontWeight:700}}>選択中の色</div>
