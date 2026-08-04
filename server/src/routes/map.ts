@@ -33,6 +33,7 @@ router.post('/ping', (req, res) => {
   });
 });
 
+
 router.post('/leave', (req, res) => {
   const playerId = getPlayerIdFromRequest(req);
 

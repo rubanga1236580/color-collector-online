@@ -1,4 +1,7 @@
-import { updateOnlinePlayer } from '../onlinePlayers.js';
+import {
+  updateOnlinePlayer,
+  removeOnlinePlayer,
+} from '../onlinePlayers.js';
 import { Router } from 'express';
 import { playerData, type PlayerData } from '../data/player.js';
 import { COLORS } from '../data/colors.js';
