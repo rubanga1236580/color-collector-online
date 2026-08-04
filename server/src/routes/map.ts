@@ -17,7 +17,11 @@ function isValidColor(color: unknown): color is string {
 }
 
 router.post('/ping', (req, res) => {
+  console.log("HEADER x-player-id =", req.header("x-player-id"));
+
   const playerId = getPlayerIdFromRequest(req);
+
+  console.log("USED playerId =", playerId);
 
   updateOnlinePlayer(playerId);
 
