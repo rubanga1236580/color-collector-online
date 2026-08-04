@@ -1,3 +1,4 @@
+import { getOnlinePlayerCount } from '../onlinePlayers.js';
 import { Router } from 'express';
 import { randomUUID } from 'crypto';
 import { getDatabase } from '../database/db.js';
@@ -12,6 +13,12 @@ import type { PlayerData } from '../data/player.js';
 import { getServerIdFromRequest } from './serverContext.js';
 
 const router = Router();
+
+router.get('/online-count', (_req, res) => {
+  res.json({
+    onlineCount: getOnlinePlayerCount(),
+  });
+});
 
 router.get('/', (req, res) => {
   const serverId = getServerIdFromRequest(req);

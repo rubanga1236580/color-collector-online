@@ -1,3 +1,4 @@
+import { updateOnlinePlayer } from '../onlinePlayers.js';
 import { Router } from 'express';
 import { playerData, type PlayerData } from '../data/player.js';
 import { COLORS } from '../data/colors.js';
@@ -137,6 +138,7 @@ function createInitialPlayerData(id: string): ValidatedPlayerPayload {
 
 router.get('/', (_req, res) => {
   const playerId = getPlayerIdFromRequest(_req);
+  updateOnlinePlayer(playerId);
 
   // SQLiteからプレイヤー情報を取得
   const dbPlayer = getPlayer(playerId);

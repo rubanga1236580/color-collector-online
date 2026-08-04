@@ -110,6 +110,7 @@ const App: React.FC = () => {
     new URLSearchParams(window.location.search)
       .get('debug') === 'true';
 
+  const [onlineCount, setOnlineCount] = useState(0);
   const [map, setMap] = useState<MapData | null>(null);
   const [player, setPlayer] = useState<PlayerData | null>(null);
   const [gacha, setGacha] = useState<GachaData | null>(null);
@@ -250,6 +251,32 @@ const [nowMs, setNowMs] = useState<number>(Date.now());
       ...value.constellation,
     },
   });
+
+  useEffect(() => {
+  const fetchOnlineCount = async () => {
+    try {
+      const response = await fetch(
+        buildApiUrl('/api/players/online-count')
+      );
+
+      if (!response.ok) {
+        return;
+      }
+
+      const data = await response.json();
+
+      setOnlineCount(data.onlineCount ?? 0);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  fetchOnlineCount();
+
+  const timer = setInterval(fetchOnlineCount, 10000);
+
+  return () => clearInterval(timer);
+}, []);
 
   useEffect(() => {
     const timerId = window.setInterval(() => {
@@ -1050,6 +1077,7 @@ setDailyTicketMessage(data.message ?? null);
         <MapScreen
           player={player}
           map={map}
+          onlineCount={onlineCount}
           selectedColor={selectedColor}
           selectedColorDetail={selectedColorDetail}
           error={error}
