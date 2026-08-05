@@ -1,8 +1,9 @@
 import {
   updateOnlinePlayer,
   removeOnlinePlayer,
+  getOnlinePlayerCount,
 } from '../onlinePlayers.js';
-import { getWebSocketServer } from '../websocket.js';
+import { broadcast } from '../websocket.js';
 import { Router } from 'express';
 import { mapData } from '../data/map.js';
 import { COLORS } from '../data/colors.js';
@@ -20,29 +21,43 @@ function isValidColor(color: unknown): color is string {
   return typeof color === 'string' && colorIdSet.has(color);
 }
 
+
 router.post('/ping', (req, res) => {
+  
   console.log("HEADER x-player-id =", req.header("x-player-id"));
 
   const playerId = getPlayerIdFromRequest(req);
 
   console.log("USED playerId =", playerId);
 
-  updateOnlinePlayer(playerId);
+updateOnlinePlayer(playerId);
 
-  res.json({
-    success: true,
-  });
+broadcast({
+  type: 'onlineCount',
+  onlineCount: getOnlinePlayerCount(),
 });
 
+console.log("[WS] onlineCount送信 =", getOnlinePlayerCount());
+
+res.json({
+  success: true,
+});
+});
 
 router.post('/leave', (req, res) => {
   const playerId = getPlayerIdFromRequest(req);
 
-  removeOnlinePlayer(playerId);
+removeOnlinePlayer(playerId);
 
-  res.json({
-    success: true,
-  });
+broadcast({
+
+  type: 'onlineCount',
+  onlineCount: getOnlinePlayerCount(),
+});
+
+res.json({
+  success: true,
+});
 });
 
 router.get('/', (_req, res) => {
@@ -170,17 +185,11 @@ mapData.cells = cells;
 console.log(`[Map] Cell painted: index=${index}, color=${color}`);
 
 // ===== WebSocketで全員に通知 =====
-const wss = getWebSocketServer();
-
-wss.clients.forEach((client) => {
-  if (client.readyState === client.OPEN) {
-    client.send(
-      JSON.stringify({
-        type: 'mapUpdated',
-      }),
-    );
-  }
+broadcast({
+  type: 'mapUpdated',
 });
+
+console.log("[WS] mapUpdated送信");
     // 更新後のデータをレスポンス
     res.json({
       player: playerData,

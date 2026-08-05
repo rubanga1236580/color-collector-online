@@ -20,3 +20,17 @@ export function createWebSocket(server: Server) {
 export function getWebSocketServer() {
   return wss;
 }
+
+export function broadcast(data: unknown) {
+  if (!wss) {
+    return;
+  }
+
+  const message = JSON.stringify(data);
+
+  wss.clients.forEach((client) => {
+    if (client.readyState === client.OPEN) {
+      client.send(message);
+    }
+  });
+}
