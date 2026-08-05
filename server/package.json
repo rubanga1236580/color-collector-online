@@ -9,19 +9,21 @@
     "start": "node dist/index.js"
   },
   "dependencies": {
+    "better-sqlite3": "^11.7.0",
     "cors": "^2.8.6",
     "express": "^5.2.1",
-    "better-sqlite3": "^11.7.0"
+    "ws": "^8.21.2"
   },
   "devDependencies": {
     "@types/better-sqlite3": "^7.6.11",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
     "@types/node": "^24.0.0",
+    "@types/ws": "^8.18.1",
     "tsx": "^4.23.1",
     "typescript": "^5.9.2"
   },
-"engines": {
-  "node": "22.x"
-}
+  "engines": {
+    "node": "22.x"
+  }
 }

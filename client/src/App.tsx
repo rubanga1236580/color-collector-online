@@ -20,6 +20,7 @@ import type { EncyclopediaData } from './types/encyclopedia';
 import type { GachaData, GachaRarity } from './types/gacha';
 import type { MapData } from './types/map';
 import type { PlayerData } from './types/player';
+import { API_BASE_URL } from './api/config';
 
 type Screen =
   | 'playerRegister'
@@ -125,6 +126,7 @@ const App: React.FC = () => {
   const [selectedColorDetail, setSelectedColorDetail] = useState<string | null>(null);
 const [error, setError] = useState<string | null>(null);
 const [dailyTicketMessage, setDailyTicketMessage] = useState<string | null>(null);
+const [socket, setSocket] = useState<WebSocket | null>(null);
 
 useEffect(() => {
   if (!error) {
@@ -383,7 +385,35 @@ const fetchPlayer = async () => {
     void loadGameData();
   }, []);
 
+  useEffect(() => {
+  const wsUrl = API_BASE_URL
+    .replace("https://", "wss://")
+    .replace("http://", "ws://");
 
+  const ws = new WebSocket(wsUrl);
+
+  ws.onopen = () => {
+    console.log("[WS] Connected");
+  };
+
+  ws.onmessage = (event) => {
+    console.log("[WS] Message:", event.data);
+  };
+
+  ws.onclose = () => {
+    console.log("[WS] Disconnected");
+  };
+
+  ws.onerror = (error) => {
+    console.error("[WS] Error", error);
+  };
+
+  setSocket(ws);
+
+  return () => {
+    ws.close();
+  };
+}, []);
 
   // マスを塗る
   const handleCellClick = async (index:number)=>{

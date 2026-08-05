@@ -1,3 +1,4 @@
+import { createWebSocket } from './websocket.js';
 import express from 'express';
 import cors from 'cors';
 import { initializeDatabase, closeDatabase } from './database/db.js';
@@ -42,6 +43,8 @@ const server = app.listen(port, () => {
   console.log('Server started:');
   console.log(`http://localhost:${port}`);
 });
+
+createWebSocket(server);
 
 // Graceful shutdown
 process.on('SIGTERM', () => {
