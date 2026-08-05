@@ -126,7 +126,7 @@ const App: React.FC = () => {
   const [selectedColorDetail, setSelectedColorDetail] = useState<string | null>(null);
 const [error, setError] = useState<string | null>(null);
 const [dailyTicketMessage, setDailyTicketMessage] = useState<string | null>(null);
-const [socket, setSocket] = useState<WebSocket | null>(null);
+
 
 useEffect(() => {
   if (!error) {
@@ -407,8 +407,6 @@ const fetchPlayer = async () => {
   ws.onerror = (error) => {
     console.error("[WS] Error", error);
   };
-
-  setSocket(ws);
 
   return () => {
     ws.close();
