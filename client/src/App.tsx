@@ -396,9 +396,15 @@ const fetchPlayer = async () => {
     console.log("[WS] Connected");
   };
 
-  ws.onmessage = (event) => {
-    console.log("[WS] Message:", event.data);
-  };
+ws.onmessage = async (event) => {
+  console.log("[WS] Message:", event.data);
+
+  const data = JSON.parse(event.data);
+
+  if (data.type === "mapUpdated") {
+    await loadGameData();
+  }
+};
 
   ws.onclose = () => {
     console.log("[WS] Disconnected");

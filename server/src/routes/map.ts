@@ -2,6 +2,7 @@ import {
   updateOnlinePlayer,
   removeOnlinePlayer,
 } from '../onlinePlayers.js';
+import { getWebSocketServer } from '../websocket.js';
 import { Router } from 'express';
 import { mapData } from '../data/map.js';
 import { COLORS } from '../data/colors.js';
@@ -165,8 +166,21 @@ saveMap(mapId, cells);
 
 // メモリも同期
 mapData.cells = cells;
-    console.log(`[Map] Cell painted: index=${index}, color=${color}`);
 
+console.log(`[Map] Cell painted: index=${index}, color=${color}`);
+
+// ===== WebSocketで全員に通知 =====
+const wss = getWebSocketServer();
+
+wss.clients.forEach((client) => {
+  if (client.readyState === client.OPEN) {
+    client.send(
+      JSON.stringify({
+        type: 'mapUpdated',
+      }),
+    );
+  }
+});
     // 更新後のデータをレスポンス
     res.json({
       player: playerData,
